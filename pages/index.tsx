@@ -1,7 +1,7 @@
 export default function Home() {
   return (
-    <div className="bg-slate-400 py-20 px-20 grid gap-10 min-h-screen">
-      <div className="bg-white p-6 rounded-3xl shadow-xl">
+    <div className="bg-slate-400 place-content-center py-20 px-20 grid gap-10 lg:grid-cols-2 xl:grid-cols-3 min-h-screen">
+      <div className="bg-white flex flex-col justify-between p-6 rounded-3xl shadow-xl">
         <span className="font-semibold text-3xl">Select Item</span>
         <ul>
           {[1, 2, 3, 4].map((i) => (
@@ -36,7 +36,7 @@ export default function Home() {
         </button>
       </div>
       <div className="bg-white overflow-hidden rounded-3xl shadow-xl group">
-        <div className="bg-blue-500 p-6 pb-14">
+        <div className="bg-blue-500 portrait:bg-indigo-600 landscape:bg-teal-600 p-6 pb-14 xl:pb-40">
           <span className="text-white text-2xl">Profile</span>
         </div>
         <div className=" rounded-3xl p-6 relative -top-5 bg-white">
@@ -57,7 +57,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="bg-white p-6 rounded-3xl shadow-xl">
+      <div className="bg-white p-6 rounded-3xl shadow-xl lg:col-span-2 xl:col-span-1">
         <div className="flex mb-5 justify-between items-center">
           <span>⬅️</span>
           <div className="space-x-3">
@@ -111,6 +111,22 @@ export default function Home() {
         </span>
         <input type="submit" value="Login" className="bg-white" />
       </form>
+      <div className="flex flex-col space-y-2 p-5">
+        <details className="select-none open:bg-indigo-600 open:text-white">
+          <summary className="cursor-pointer">무슨 음식?</summary>
+          <span>치킨</span>
+        </details>
+        <input
+          type="file"
+          className="file:cursor-pointer file:hover:text-purple-400 file:hover:bg-white file:hover:border-purple-400 file:hover:border file:transition-colors file:border-0 file:rounded-xl file:bg-purple-400 file:px-5 file:text-white"
+        />
+        <p className="first-letter:text-7xl first-letter:hover:text-purple-400">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni est
+          officiis asperiores quasi labore et, fugit quae eveniet repudiandae
+          nam earum ipsum culpa repellat iusto libero perspiciatis praesentium
+          voluptatem dolor.
+        </p>
+      </div>
     </div>
   );
 }
