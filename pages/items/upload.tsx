@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 
 const Upload: NextPage = () => {
   return (
-    <div className="px-4 py-16">
+    <div className="px-4 py-16 space-y-5">
       <div>
         <label className="w-full cursor-pointer text-gray-600 hover:border-orange-500 hover:text-orange-500 flex items-center justify-center border-2 border-dashed border-gray-300 h-48 rounded-md">
           <svg
@@ -22,7 +22,7 @@ const Upload: NextPage = () => {
           <input className="hidden" type="file" />
         </label>
       </div>
-      <div className="my-5">
+      <div>
         <label
           className="mb-1 block text-sm font-medium text-gray-700"
           htmlFor="name"
@@ -38,7 +38,7 @@ const Upload: NextPage = () => {
           />
         </div>
       </div>
-      <div className="my-5">
+      <div>
         <label
           htmlFor="price"
           className="mb-1 block text-sm font-medium text-gray-700"
