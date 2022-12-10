@@ -39,7 +39,7 @@ async function handler(
       to: process.env.PHONE_NUMBER!,
       body: `your login token is ${payload}`,
     });
-    console.log(message);
+    // console.log(message);
   } else if (email) {
     const mailOptions = {
       from: process.env.MAIL_ID,
