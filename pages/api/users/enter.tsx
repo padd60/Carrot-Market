@@ -14,7 +14,7 @@ async function handler(
   res: NextApiResponse<ResponseType>,
 ) {
   const { phone, email } = req.body;
-  const user = phone ? { phone: Number(phone) } : email ? { email } : null;
+  const user = phone ? { phone: phone } : email ? { email } : null;
   if (!user) return res.status(400).json({ ok: false });
   const payload = String(Math.floor(100000 + Math.random() * 900000));
   const token = await client.token.create({
@@ -34,12 +34,11 @@ async function handler(
     },
   });
   if (phone) {
-    const message = await twilioClient.messages.create({
+    await twilioClient.messages.create({
       messagingServiceSid: process.env.TWILIO_MESSAGE_SERVICES_SID,
       to: process.env.PHONE_NUMBER!,
       body: `your login token is ${payload}`,
     });
-    // console.log(message);
   } else if (email) {
     const mailOptions = {
       from: process.env.MAIL_ID,
