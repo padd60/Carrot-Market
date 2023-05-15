@@ -1,30 +1,42 @@
-import type { NextPage } from 'next';
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import Button from '@components/button';
-import Input from '@components/input';
-import useMutation from '@libs/client/useMutation';
-import { cls } from '@libs/client/utils';
-import { EnterForm, MuationResult, TokenForm } from '@interfaces/enterType';
-import { useRouter } from 'next/router';
+import type { NextPage } from "next";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import Button from "@components/button";
+import Input from "@components/input";
+import useMutation from "@libs/client/useMutation";
+import { cls } from "@libs/client/utils";
+import { useRouter } from "next/router";
+
+interface EnterForm {
+  email?: string;
+  phone?: string;
+}
+
+interface TokenForm {
+  token: string;
+}
+
+interface MuationResult {
+  ok: boolean;
+}
 
 const Enter: NextPage = () => {
   const [enter, { loading, data, error }] =
-    useMutation<MuationResult>('/api/users/enter');
+    useMutation<MuationResult>("/api/users/enter");
   const [confirmToken, { loading: tokenLoading, data: tokenData }] =
-    useMutation<MuationResult>('/api/users/confirm');
+    useMutation<MuationResult>("/api/users/confirm");
 
   const { register, handleSubmit, reset } = useForm<EnterForm>();
   const { register: tokenRegister, handleSubmit: tokenHandleSubmit } =
     useForm<TokenForm>();
-  const [method, setMethod] = useState<'email' | 'phone'>('email');
+  const [method, setMethod] = useState<"email" | "phone">("email");
   const onEmailClick = () => {
     reset();
-    setMethod('email');
+    setMethod("email");
   };
   const onPhoneClick = () => {
     reset();
-    setMethod('phone');
+    setMethod("phone");
   };
 
   const onValid = (validForm: EnterForm) => {
@@ -37,7 +49,7 @@ const Enter: NextPage = () => {
   const router = useRouter();
   useEffect(() => {
     if (tokenData?.ok) {
-      router.push('/');
+      router.push("/");
     }
   }, [tokenData, router]);
   return (
@@ -50,7 +62,7 @@ const Enter: NextPage = () => {
             className="flex flex-col mt-8 space-y-4"
           >
             <Input
-              register={tokenRegister('token', {
+              register={tokenRegister("token", {
                 required: true,
               })}
               name="token"
@@ -58,7 +70,7 @@ const Enter: NextPage = () => {
               type="number"
               required
             />
-            <Button text={tokenLoading ? 'Loading...' : 'Confirm Token'} />
+            <Button text={tokenLoading ? "Loading..." : "Confirm Token"} />
           </form>
         ) : (
           <>
@@ -69,10 +81,10 @@ const Enter: NextPage = () => {
               <div className="grid  border-b  w-full mt-8 grid-cols-2 ">
                 <button
                   className={cls(
-                    'pb-4 font-medium text-sm border-b-2',
-                    method === 'email'
-                      ? ' border-orange-500 text-orange-400'
-                      : 'border-transparent hover:text-gray-400 text-gray-500',
+                    "pb-4 font-medium text-sm border-b-2",
+                    method === "email"
+                      ? " border-orange-500 text-orange-400"
+                      : "border-transparent hover:text-gray-400 text-gray-500"
                   )}
                   onClick={onEmailClick}
                 >
@@ -80,10 +92,10 @@ const Enter: NextPage = () => {
                 </button>
                 <button
                   className={cls(
-                    'pb-4 font-medium text-sm border-b-2',
-                    method === 'phone'
-                      ? ' border-orange-500 text-orange-400'
-                      : 'border-transparent hover:text-gray-400 text-gray-500',
+                    "pb-4 font-medium text-sm border-b-2",
+                    method === "phone"
+                      ? " border-orange-500 text-orange-400"
+                      : "border-transparent hover:text-gray-400 text-gray-500"
                   )}
                   onClick={onPhoneClick}
                 >
@@ -95,9 +107,9 @@ const Enter: NextPage = () => {
               onSubmit={handleSubmit(onValid)}
               className="flex flex-col mt-8 space-y-4"
             >
-              {method === 'email' ? (
+              {method === "email" ? (
                 <Input
-                  register={register('email', {
+                  register={register("email", {
                     required: true,
                   })}
                   name="email"
@@ -106,9 +118,9 @@ const Enter: NextPage = () => {
                   required
                 />
               ) : null}
-              {method === 'phone' ? (
+              {method === "phone" ? (
                 <Input
-                  register={register('phone', {
+                  register={register("phone", {
                     required: true,
                   })}
                   name="phone"
@@ -118,10 +130,10 @@ const Enter: NextPage = () => {
                   required
                 />
               ) : null}
-              {method === 'email' ? <Button text={'Get login link'} /> : null}
-              {method === 'phone' ? (
+              {method === "email" ? <Button text={"Get login link"} /> : null}
+              {method === "phone" ? (
                 <Button
-                  text={loading ? 'Loading...' : 'Get one-time password'}
+                  text={loading ? "Loading..." : "Get one-time password"}
                 />
               ) : null}
             </form>
